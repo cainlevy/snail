@@ -1,0 +1,31 @@
+Snail
+=====
+
+International snail mail addressing is a pain. This plugin begins to make it easier.
+
+The first step is to take standardized data and format it properly for mailing from the United States to any other country. My effort here is based on Frank's Compulsive Guide to Postal Addresses, available from http://www.columbia.edu/kermit/postal.html as of July 2009.
+
+Future work should include:
+* country-specific validations
+* form field generator
+
+Example
+=======
+
+Taking regular data and formatting it into an internationally mailable address:
+
+  Snail.new(
+    :name => "Jon Doe",
+    :line_1 => "12345 Somewhere Ln",
+    :line_2 => nil,
+    :city => "Bentley",
+    :region => "WA",
+    :postal_code => "6102",
+    :country => "Australia"
+  ).to_address
+  
+  => "Jon Doe\n12345 Somewhere Ln\nBENTLEY WA  6102\nAUSTRALIA"
+
+See the test cases for more examples.
+
+Copyright (c) 2009 Lance, released under the MIT license
