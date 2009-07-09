@@ -1,3 +1,5 @@
+require 'snail/constants'
+
 class Snail
   include Configurable
   

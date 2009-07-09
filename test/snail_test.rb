@@ -2,12 +2,21 @@ require File.dirname(__FILE__) + '/test_helper'
 
 class SnailTest < ActiveSupport::TestCase
   def setup
-    @us = {:name => "John Doe", :street => "12345 5th St", :city => "Somewheres", :state => "NY", :zip => "12345", :country => 'United States'}
+    @us = {:name => "John Doe", :street => "12345 5th St", :city => "Somewheres", :state => "NY", :zip => "12345", :country => 'USA'}
     @ca = {:name => "John Doe", :street => "12345 5th St", :city => "Somewheres", :state => "NY", :zip => "12345", :country => 'Canada'}
   end
 
   test "provides USPS country names" do
-    assert false, "pending"
+    assert Snail.const_defined?('USPS_COUNTRIES')
+  end
+  
+  test "provides USA state names with abbreviations" do
+    assert Snail.const_defined?('USA_STATES')
+    assert_equal 'MN', Snail::USA_STATES['Minnesota']
+  end
+  
+  test "USA states include territories and islands" do
+    assert Snail::USA_STATES['Guam']
   end
 
   ##
