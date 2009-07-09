@@ -67,4 +67,9 @@ class SnailTest < ActiveSupport::TestCase
     s = Snail.new(@ca)
     assert s.to_s.match(/CANADA/)
   end
+  
+  test "unknown countries raise UnknownCountryError" do
+    s = Snail.new(@ca.merge(:country => "Unknown"))
+    assert_raises Snail::UnknownCountryError do s.to_s end
+  end
 end
