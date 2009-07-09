@@ -2,8 +2,8 @@ require File.dirname(__FILE__) + '/test_helper'
 
 class SnailTest < ActiveSupport::TestCase
   def setup
-    @us = {:name => "John Doe", :street => "12345 5th St", :city => "Somewheres", :state => "NY", :zip => "12345", :country => 'USA'}
-    @ca = {:name => "John Doe", :street => "12345 5th St", :city => "Somewheres", :state => "NY", :zip => "12345", :country => 'Canada'}
+    @us = {:name => "John Doe", :line_1 => "12345 5th St", :city => "Somewheres", :state => "NY", :zip => "12345", :country => 'USA'}
+    @ca = {:name => "John Doe", :line_1 => "12345 5th St", :city => "Somewheres", :state => "NY", :zip => "12345", :country => 'Canada'}
   end
 
   test "provides USPS country names" do
@@ -68,8 +68,15 @@ class SnailTest < ActiveSupport::TestCase
     assert s.to_s.match(/CANADA/)
   end
   
+  test "empty lines are removed" do
+    s = Snail.new(@us.merge(:line_1 => ""))
+    assert !s.to_s.match(/^$/)
+  end
+  
   test "unknown countries raise UnknownCountryError" do
     s = Snail.new(@ca.merge(:country => "Unknown"))
     assert_raises Snail::UnknownCountryError do s.to_s end
   end
 end
+
+

@@ -8,8 +8,8 @@ class Snail
   
   # My made-up standard fields.
   attr_accessor :name
-  attr_accessor :institution
-  attr_accessor :street
+  attr_accessor :line_1
+  attr_accessor :line_2
   attr_accessor :city
   attr_accessor :region
   attr_accessor :postal_code
@@ -18,9 +18,7 @@ class Snail
   # Aliases for easier assignment compatibility
   {
     :full_name  => :name,
-    :company    => :institution,
-    :business   => :institution,
-    :line_1     => :street,
+    :street     => :line_1,
     :town       => :city,
     :state      => :region,
     :province   => :region,
@@ -32,7 +30,7 @@ class Snail
   end
   
   def to_s
-    [name, institution, street, city_line, country_line].compact.join("\n")
+    [name, line_1, line_2, city_line, country_line].select{|line| !(line.nil? or line.empty?)}.join("\n")
   end
   
   # this method will get much larger. completeness is out of my scope at this time.
