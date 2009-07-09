@@ -77,6 +77,16 @@ class SnailTest < ActiveSupport::TestCase
     s = Snail.new(@ca.merge(:country => "Unknown"))
     assert_raises Snail::UnknownCountryError do s.to_s end
   end
+  
+  test "to_s" do
+    s = Snail.new(@ca)
+    assert_equal "John Doe\n12345 5th St\nSomewheres NY  12345\nCANADA", s.to_s
+  end
+  
+  test "to_html" do
+    s = Snail.new(@ca)
+    assert_equal "<address>John Doe<br />12345 5th St<br />Somewheres NY  12345<br />CANADA</address>", s.to_html
+  end
 end
 
 

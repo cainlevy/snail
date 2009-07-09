@@ -33,6 +33,10 @@ class Snail
     [name, line_1, line_2, city_line, country_line].select{|line| !(line.nil? or line.empty?)}.join("\n")
   end
   
+  def to_html 
+    "<address>#{to_s.gsub("\n", '<br />')}</address>"
+  end
+  
   # this method will get much larger. completeness is out of my scope at this time.
   # currently it's based on the sampling of city line formats from frank's compulsive guide.
   def city_line
