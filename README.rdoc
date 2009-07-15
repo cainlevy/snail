@@ -1,7 +1,8 @@
-Snail
-=====
+= Snail
 
 International snail mail addressing is a pain. This plugin begins to make it easier.
+
+== How?
 
 The basic idea is that mailing addresses need first and foremost to make it OUT of the originating country. It's beyond the scope of my current work to consider any originating country besides the United States, so that's where I am beginning. I will leave other countries of origination to the open source community.
 
@@ -19,6 +20,8 @@ Nearly all of the variation in formatting rules applies to the city line. Depend
 
 And then there's Great Britain, which Frank's Compulsive Guide describes as "where to find the most confusing addresses on earth" (a description confirmed and further confused by a source from within Royal Mail).
 
+== The Future
+
 I hope to tackle this plugin in stages, with help from the open source community:
 
 # provide standardized USPS country names
@@ -28,8 +31,7 @@ I hope to tackle this plugin in stages, with help from the open source community
 # expand to other originating countries
 # continue fleshing out the formatting and validation
 
-Example
-=======
+== Example
 
 Taking regular data and formatting it into an internationally mailable address:
 
@@ -45,6 +47,6 @@ Taking regular data and formatting it into an internationally mailable address:
   
   => "Jon Doe\n12345 Somewhere Ln\nBENTLEY WA  6102\nAUSTRALIA"
 
-See the test cases for more examples.
+See the test cases for more.
 
-Copyright (c) 2009 Lance, released under the MIT license
+Copyright (c) 2009 Lance Ivy, released under the MIT license
