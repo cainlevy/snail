@@ -61,8 +61,11 @@ class Snail
       "#{postal_code} #{city}"
     when 'Hong Kong', 'Syria', 'Iraq'
       "#{city}"
+    when 'Japan'
+      "#{city}, #{region}\n#{postal_code}"
     else
-      raise UnknownCountryError, "unknown country: #{country}"
+      Rails.logger.error "[Snail] Unknown Country: #{country}"
+      "#{city} #{region}  #{postal_code}"
     end
   end
   
