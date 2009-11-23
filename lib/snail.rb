@@ -45,24 +45,42 @@ class Snail
       "#{city}, #{region}  #{postal_code}"
     when 'Brazil'
       "#{postal_code} #{city}-#{region}"
-    when 'Mexico'
+    when 'Mexico', 'Slovakia'
       "#{postal_code} #{city}, #{region}"
     when 'Italy'
       "#{postal_code} #{city} (#{region})"
+    when 'Belarus'
+      "#{postal_code} #{city}-(#{region})"
     when 'USA', 'Canada', 'Australia', nil, ""
       "#{city} #{region}  #{postal_code}"
-    when 'Israel', 'Denmark', 'Finland', 'France', 'Germany', 'Greece', 'Italy', 'Norway', 'Spain', 'Sweden'
+    when 'Israel', 'Denmark', 'Finland', 'France', 'Germany', 'Greece', 'Italy', 'Norway', 'Spain', 'Sweden', 'Turkey', 'Cyprus', 'Portugal', 'Macedonia', 'Bosnia and Herzegovina'
       "#{postal_code} #{city}"
+    when 'Kuwait', 'Syria', 'Oman', 'Estonia','Luxembourg', 'Belgium', 'Iceland', 'Switzerland', 'Austria', 'Moldova', 'Montenegro', 'Serbia', 'Bulgaria', 'Georgia', 'Poland', 'Armenia', 'Croatia', 'Romania', 'Azerbaijan'
+      "#{postal_code} #{city}"
+    when 'Netherlands'
+      "#{postal_code} #{region} #{city}"
     when 'Ireland'
       "#{city}, #{region}"
-    when 'England', 'Scotland', 'Wales', 'United Kingdom', 'Russia', 'Ukraine'
+    when 'England', 'Scotland', 'Wales', 'United Kingdom', 'Russia', 'Russian Federation', 'Ukraine', 'Jordan', 'Lebanon','Iran, Islamic Republic of', 'Iran', 'Saudi Arabia'
       "#{city}  #{postal_code}" # Locally these may be on separate lines. The USPS prefers the city line above the country line, though.
     when 'Ecuador'
       "#{postal_code} #{city}"
-    when 'Hong Kong', 'Syria', 'Iraq'
+    when 'Hong Kong', 'Syria', 'Iraq', 'Yemen', 'Qatar', 'Albania'
       "#{city}"
+    when 'United Arab Emirates'
+      "#{postal_code}\n#{city}"
     when 'Japan'
       "#{city}, #{region}\n#{postal_code}"
+    when 'Egypt', 'South Africa','Isle of Man', 'Kazakhstan', 'Hungary'
+      "#{city}\n#{postal_code}"
+    when 'Latvia'
+      "#{city}, LV-#{postal_code}"
+    when 'Lithuania'
+      "LT-#{postal_code} #{city}"
+    when 'Slovenia'
+      "SI-#{postal_code} #{city}"
+    when 'Czech Republic'
+      "#{postal_code} #{region}\n#{city}"
     else
       Rails.logger.error "[Snail] Unknown Country: #{country}"
       "#{city} #{region}  #{postal_code}"
