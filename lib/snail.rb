@@ -100,6 +100,6 @@ class Snail
   end
   
   def country_line
-    self.class.home_country.to_s.upcase == country.to_s.upcase ? nil : country.upcase
+    self.class.home_country.to_s.upcase == country.to_s.upcase ? nil : country.to_s.upcase
   end
 end
