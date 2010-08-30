@@ -47,6 +47,22 @@ Taking regular data and formatting it into an internationally mailable address:
   
   => "Jon Doe\n12345 Somewhere Ln\nBENTLEY WA  6102\nAUSTRALIA"
 
+By default addresses with a country of USA are considered domestic and the country will
+be left off any output. To change the home country:
+
+  Snail.home_country = "Australia"
+  Snail.new(
+    :name => "Jon Doe",
+    :line_1 => "12345 Somewhere Ln",
+    :line_2 => nil,
+    :city => "Bentley",
+    :region => "WA",
+    :postal_code => "6102",
+    :country => "Australia"
+  ).to_s
+
+  => "Jon Doe\n12345 Somewhere Ln\nBENTLEY WA  6102"
+
 See the test cases for more.
 
 Copyright (c) 2009 Lance Ivy, released under the MIT license
