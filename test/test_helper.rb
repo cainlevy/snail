@@ -3,7 +3,9 @@ require 'active_support'
 require 'active_support/test_case'
 require 'test/unit'
 
-ActiveSupport::Dependencies.load_paths << File.dirname(__FILE__) + '/../lib'
+$LOAD_PATH.unshift File.dirname(__FILE__) + '/../lib'
+
+require 'snail'
 
 module Rails
   def self.logger
