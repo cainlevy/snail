@@ -28,6 +28,14 @@ class Snail
   }.each do |new, existing|
     alias_method "#{new}=", "#{existing}="
   end
+
+  def self.home_country
+    @home_country ||= "USA"
+  end
+
+  def self.home_country=(val)
+    @home_country = val
+  end
   
   def to_s
     [name, line_1, line_2, city_line, country_line].select{|line| !(line.nil? or line.empty?)}.join("\n")
@@ -88,6 +96,6 @@ class Snail
   end
   
   def country_line
-    country == 'USA' ? nil : country.upcase
+    self.class.home_country.to_s.upcase == country.to_s.upcase ? nil : country.upcase
   end
 end

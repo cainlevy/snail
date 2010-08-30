@@ -57,6 +57,13 @@ class SnailTest < ActiveSupport::TestCase
     s = Snail.new(@us)
     assert !s.to_s.match(/United States/i)
   end
+
+  test "does not include country name for domestic addresses in canada" do
+    Snail.home_country = "Canada"
+    s = Snail.new(@ca)
+    assert !s.to_s.match(/Canada/i)
+    Snail.home_country = "USA"
+  end
   
   test "includes country name for international addresses" do
     s = Snail.new(@ca)
