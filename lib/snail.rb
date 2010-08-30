@@ -92,7 +92,9 @@ class Snail
     when 'Czech Republic'
       "#{postal_code} #{region}\n#{city}"
     else
-      Rails.logger.error "[Snail] Unknown Country: #{country}"
+      if Kernel.const_defined?("Rails")
+        Rails.logger.error "[Snail] Unknown Country: #{country}"
+      end
       "#{city} #{region}  #{postal_code}"
     end
   end
