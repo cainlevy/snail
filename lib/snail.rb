@@ -61,7 +61,7 @@ class Snail
       "#{postal_code} #{region} #{city}"
     when 'Ireland'
       "#{city}, #{region}"
-    when 'England', 'Scotland', 'Wales', 'United Kingdom', 'Russia', 'Russian Federation', 'Ukraine', 'Jordan', 'Lebanon','Iran, Islamic Republic of', 'Iran', 'Saudi Arabia'
+    when 'England', 'Scotland', 'Wales', 'United Kingdom', 'Russia', 'Russian Federation', 'Ukraine', 'Jordan', 'Lebanon','Iran, Islamic Republic of', 'Iran', 'Saudi Arabia', 'New Zealand'
       "#{city}  #{postal_code}" # Locally these may be on separate lines. The USPS prefers the city line above the country line, though.
     when 'Ecuador'
       "#{postal_code} #{city}"
