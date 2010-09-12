@@ -1,3 +1,5 @@
+# coding: utf-8
+
 class Snail
   # based on http://www.columbia.edu/kermit/postal.html#index, which is in turn based on
   # the USPS International Mailing Manual. See also http://www.25thandclement.com/~william/USPS_ICL.html.
