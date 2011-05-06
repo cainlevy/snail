@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name              = "snail"
-  s.version           = "0.5.3"
+  s.version           = "0.5.4"
   s.summary           = "Easily format snail mail addresses for international delivery"
   s.description       = "International snail mail addressing is a pain. This begins to make it easier."
   s.author            = "Lance Ivy"
