@@ -306,4 +306,21 @@ class Snail
     "Armed Forces Middle East" => "AE",
     "Armed Forces Pacific" => "AP",
   }
+
+  # see http://en.wikipedia.org/wiki/Canadian_subnational_postal_abbreviations
+  CA_PROVINCES = {
+    "Alberta" => "AB",
+    "British Columbia" => "BC",
+    "Manitoba" => "MB",
+    "New Brunswick" => "NB",
+    "Newfoundland and Labrador" => "NL",
+    "Nova Scotia" => "NS",
+    "Northwest Territories" => "NT",
+    "Nunavut" => "NU",
+    "Ontario" => "ON",
+    "Prince Edward Island" => "PE",
+    "Quebec" => "QC",
+    "Saskatchewan" => "SK",
+    "Yukon" => "YT"
+  }
 end
