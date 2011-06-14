@@ -2,6 +2,9 @@ require 'snail/configurable'
 require 'snail/constants'
 require 'snail_helpers'
 
+require 'cgi'
+require 'active_support/core_ext/string/output_safety'
+
 class Snail
   include Configurable
   
@@ -44,7 +47,7 @@ class Snail
   end
   
   def to_html 
-    "<address>#{to_s.gsub("\n", '<br />')}</address>"
+    "<address>#{CGI.escapeHTML(to_s).gsub("\n", '<br />')}</address>".html_safe
   end
   
   # this method will get much larger. completeness is out of my scope at this time.
