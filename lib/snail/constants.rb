@@ -234,7 +234,7 @@ class Snail
     'Zambia',
     'Zimbabwe'
   ]
-  
+
   # see http://www.columbia.edu/kermit/postal.html#usa
   # and http://www.usps.com/ncsc/lookups/usps_abbreviations.html
   USA_STATES = {
@@ -323,4 +323,17 @@ class Snail
     "Saskatchewan" => "SK",
     "Yukon" => "YT"
   }
+
+  # see http://en.wikipedia.org/wiki/Postcodes_in_Australia#Australia_States_and_territories
+  AU_REGIONS = {
+    "Australian Capital Territory" => "ACT",
+    "New South Wales" => "NSW",
+    "Victoria" => "VIC",
+    "Queensland" => "QLD",
+    "South Australia" => "SA",
+    "Western Australia" => "WA",
+    "Tasmania" => "TAS",
+    "Northern Territory" => "NT"
+  }
+
 end
