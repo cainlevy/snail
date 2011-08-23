@@ -5,6 +5,10 @@ require 'snail_helpers'
 require 'cgi'
 require 'active_support/core_ext/string/output_safety'
 
+if defined? ActionView
+  ActionView::Base.class_eval { include SnailHelpers }
+end
+
 class Snail
   include Configurable
   
