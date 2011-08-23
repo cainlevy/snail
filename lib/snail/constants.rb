@@ -7,7 +7,7 @@ class Snail
     'Afghanistan',
     'Albania',
     'Algeria',
-    'andorra',
+    'Andorra',
     'Angola',
     'Anguilla',
     'Antigua and Barbuda',
