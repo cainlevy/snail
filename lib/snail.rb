@@ -75,7 +75,7 @@ class Snail
     when 'Kuwait', 'Syria', 'Oman', 'Estonia','Luxembourg', 'Belgium', 'Iceland', 'Switzerland', 'Austria', 'Moldova', 'Montenegro', 'Serbia', 'Bulgaria', 'Georgia', 'Poland', 'Armenia', 'Croatia', 'Romania', 'Azerbaijan'
       "#{postal_code} #{city}"
     when 'Netherlands'
-      "#{postal_code} #{region} #{city}"
+      "#{postal_code}  #{city}"
     when 'Ireland'
       "#{city}, #{region}"
     when 'England', 'Scotland', 'Wales', 'United Kingdom', 'Russia', 'Russian Federation', 'Ukraine', 'Jordan', 'Lebanon','Iran, Islamic Republic of', 'Iran', 'Saudi Arabia', 'New Zealand'
