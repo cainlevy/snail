@@ -335,6 +335,7 @@ class Snail
       "Armed Forces Europe" => "AE",
       "Armed Forces Middle East" => "AE",
       "Armed Forces Pacific" => "AP",
+      "Australia" => "AQ"
     }
   }
 
