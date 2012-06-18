@@ -173,7 +173,7 @@ class Snail
     'Republic of the Congo',
     'Reunion',
     'Romania',
-    'Russia',
+    'Russian Federation',
     'Rwanda',
     'Saint Helena',
     'Saint Kitts and Nevis',
