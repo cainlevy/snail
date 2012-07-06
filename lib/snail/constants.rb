@@ -579,7 +579,7 @@ class Snail
       'UA' => ["UKRAINE"],
       'UG' => ["UGANDA"],
       'UM' => ["UNITED STATES MINOR OUTLYING ISLANDS"],
-      'US' => ["UNITED STATES"],
+      'US' => ["UNITED STATES", "UNITED STATES OF AMERICA"],
       'UY' => ["URUGUAY"],
       'UZ' => ["UZBEKISTAN"],
       'VA' => ["VATICAN CITY"],
