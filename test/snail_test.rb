@@ -81,6 +81,21 @@ class SnailTest < ActiveSupport::TestCase
     assert s.to_s[-5,5] == "12345"
   end
 
+  test "store country from country name in alpha2" do
+    s = Snail.new(@ca.merge(:country => 'Slovenia'))
+    assert_equal "SI", s.country
+  end
+
+  test "store country from country alpha3 in alpha2" do
+    s = Snail.new(@ca.merge(:country => 'SVN'))
+    assert_equal "SI", s.country
+  end
+
+  test "store country from country alpha2 exception in alpha2" do
+    s = Snail.new(@ca.merge(:country => 'UK'))
+    assert_equal "GB", s.country
+  end
+
   test "country names are uppercased" do
     s = Snail.new(@ca)
     assert s.to_s.match(/CANADA/)
