@@ -3,7 +3,7 @@ require File.dirname(__FILE__) + '/test_helper'
 class SnailTest < ActiveSupport::TestCase
   def setup
     @us = {:name => "John Doe", :line_1 => "12345 5th St", :city => "Somewheres", :state => "NY", :zip => "12345", :country => 'USA'}
-    @ca = {:name => "John Doe", :line_1 => "12345 5th St", :city => "Somewheres", :state => "NY", :zip => "12345", :country => 'Canada'}
+    @ca = {:name => "John Doe", :line_1 => "12345 5th St", :city => "Somewheres", :state => "NY", :zip => "12345", :country => 'CAN'}
   end
 
   test "provides USPS country names" do

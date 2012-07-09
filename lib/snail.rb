@@ -11,10 +11,10 @@ end
 
 class Snail
   include Configurable
-  
+
   # this will be raised whenever formatting or validation is run on an unsupported or unknown country
   class UnknownCountryError < ArgumentError; end
-  
+
   # My made-up standard fields.
   attr_accessor :name
   attr_accessor :line_1
@@ -23,7 +23,7 @@ class Snail
   attr_accessor :region
   attr_accessor :postal_code
   attr_accessor :country
-  
+
   # Aliases for easier assignment compatibility
   {
     :full_name  => :name,
@@ -56,9 +56,9 @@ class Snail
     elsif iso = ::Snail::Iso3166::ALPHA3_TO_ALPHA2[val]
       iso
     elsif iso_pair = ::Snail::Iso3166::ALPHA2.find { |a2, names| names.include?(val) }
-      ActiveSupport::Deprecation.warn("Country name lookup will be deprecated in the near future. Please pass ISO3166 country codes to Snail instead.")
+      ActiveSupport::Deprecation.warn("Country name lookup will be deprecated in the near future. Please pass ISO3166 country codes to Snail instead.", caller)
       iso_pair.first
-    else 
+    else
       nil
     end
   end
@@ -67,15 +67,15 @@ class Snail
   def country=(val)
     @country = Snail.lookup_country_iso(val)
   end
-  
+
   def to_s
     [name, line_1, line_2, city_line, country_line].select{|line| !(line.nil? or line.empty?)}.join("\n")
   end
-  
-  def to_html 
+
+  def to_html
     "<address>#{CGI.escapeHTML(to_s).gsub("\n", '<br />')}</address>".html_safe
   end
-  
+
   # this method will get much larger. completeness is out of my scope at this time.
   # currently it's based on the sampling of city line formats from frank's compulsive guide.
   def city_line
@@ -127,7 +127,7 @@ class Snail
       "#{city} #{region}  #{postal_code}"
     end
   end
-  
+
   # TODO after country name lookup deprecation, add localized country names to this
   def country_line
     self.class.home_country == country ? nil : ::Snail::Iso3166::ALPHA2[country]
