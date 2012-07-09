@@ -56,6 +56,7 @@ class Snail
     elsif iso = ::Snail::Iso3166::ALPHA3_TO_ALPHA2[val]
       iso
     elsif iso_pair = ::Snail::Iso3166::ALPHA2.find { |a2, names| names.include?(val) }
+      ActiveSupport::Deprecation.warn("Country name lookup will be deprecated in the near future. Please pass ISO3166 country codes to Snail instead.")
       iso_pair.first
     else 
       nil
@@ -127,6 +128,7 @@ class Snail
     end
   end
   
+  # TODO after country name lookup deprecation, add localized country names to this
   def country_line
     self.class.home_country == country ? nil : ::Snail::Iso3166::ALPHA2[country]
   end

@@ -86,6 +86,11 @@ class SnailTest < ActiveSupport::TestCase
     assert_equal "SI", s.country
   end
 
+  test "store country from uppercase country name in alpha2" do
+    s = Snail.new(@ca.merge(:country => 'JAPAN'))
+    assert_equal "JP", s.country
+  end
+
   test "store country from country alpha3 in alpha2" do
     s = Snail.new(@ca.merge(:country => 'SVN'))
     assert_equal "SI", s.country
