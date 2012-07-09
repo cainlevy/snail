@@ -51,6 +51,35 @@ class SnailTest < ActiveSupport::TestCase
   end
 
   ##
+  ## Country Normalization
+  ##
+
+  test "normalize country name to alpha2" do
+    s = Snail.new(@ca.merge(:country => 'Slovenia'))
+    assert_equal "SI", s.country
+  end
+
+  test "normalize uppercase country name to alpha2" do
+    s = Snail.new(@ca.merge(:country => 'JAPAN'))
+    assert_equal "JP", s.country
+  end
+
+  test "normalize alpha3 to alpha2" do
+    s = Snail.new(@ca.merge(:country => 'SVN'))
+    assert_equal "SI", s.country
+  end
+
+  test "normalize alpha2 exceptions to alpha2" do
+    s = Snail.new(@ca.merge(:country => 'UK'))
+    assert_equal "GB", s.country
+  end
+
+  test "leave alpha2 as alpha2" do
+    s = Snail.new(@ca.merge(:country => 'GB'))
+    assert_equal "GB", s.country
+  end
+
+  ##
   ## Formatting
   ##
 
@@ -79,31 +108,6 @@ class SnailTest < ActiveSupport::TestCase
   test "output ok if country is nil" do
     s = Snail.new(@ca.merge(:country => nil))
     assert s.to_s[-5,5] == "12345"
-  end
-
-  test "store country from country name in alpha2" do
-    s = Snail.new(@ca.merge(:country => 'Slovenia'))
-    assert_equal "SI", s.country
-  end
-
-  test "store country from uppercase country name in alpha2" do
-    s = Snail.new(@ca.merge(:country => 'JAPAN'))
-    assert_equal "JP", s.country
-  end
-
-  test "store country from country alpha3 in alpha2" do
-    s = Snail.new(@ca.merge(:country => 'SVN'))
-    assert_equal "SI", s.country
-  end
-
-  test "store country from country alpha2 in alpha2" do
-    s = Snail.new(@ca.merge(:country => 'GB'))
-    assert_equal "GB", s.country
-  end
-
-  test "store country from country alpha2 exception in alpha2" do
-    s = Snail.new(@ca.merge(:country => 'UK'))
-    assert_equal "GB", s.country
   end
 
   test "country names are uppercased" do
