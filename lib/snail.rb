@@ -130,6 +130,6 @@ class Snail
 
   # TODO after country name lookup deprecation, add localized country names to this
   def country_line
-    self.class.home_country == country ? nil : ::Snail::Iso3166::ALPHA2[country]
+    ::Snail::Iso3166::ALPHA2[country].first if country and self.class.home_country != country
   end
 end

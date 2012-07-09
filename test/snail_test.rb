@@ -102,7 +102,12 @@ class SnailTest < ActiveSupport::TestCase
 
   test "includes country name for international addresses" do
     s = Snail.new(@ca)
-    assert s.to_s.match(/Canada/i), s.to_s
+    assert s.to_s.match(/Canada\Z/i), s.to_s
+  end
+
+  test "includes first country name for countries with many commonly used names" do
+    s = Snail.new(@ca.merge(:country => 'UK'))
+    assert s.to_s.match(/United Kingdom\Z/i), s.to_s
   end
 
   test "output ok if country is nil" do
