@@ -39,11 +39,33 @@ class Snail
   end
 
   def self.home_country
-    @home_country ||= "USA"
+    @home_country ||= "US"
   end
 
   def self.home_country=(val)
-    @home_country = val
+    @home_country = lookup_country_iso(val)
+  end
+
+  def self.lookup_country_iso(val)
+    return nil if val.blank?
+    val = val.upcase
+    if iso = ::Snail::Iso3166::ALPHA2[val]
+      iso
+    elsif iso = ::Snail::Iso3166::ALPHA2_EXCEPTIONS[val]
+      iso
+    elsif iso = ::Snail::Iso3166::ALPHA3_TO_ALPHA2[val]
+      iso
+    elsif iso_pair = ::Snail::Iso3166::ALPHA2.find { |a2, names| names.include?(val) }
+      ActiveSupport::Deprecation.warn("Country name lookup will be deprecated in the near future. Please pass ISO3166 country codes to Snail instead.")
+      iso_pair.first
+    else 
+      nil
+    end
+  end
+
+  # Store country as ISO-3166 Alpha 2
+  def country=(val)
+    @country = Snail.lookup_country_iso(val)
   end
   
   def to_s
@@ -58,45 +80,45 @@ class Snail
   # currently it's based on the sampling of city line formats from frank's compulsive guide.
   def city_line
     case country
-    when 'China', 'India'
+    when 'CN', 'IN'
       "#{city}, #{region}  #{postal_code}"
-    when 'Brazil'
+    when 'BR'
       "#{postal_code} #{city}-#{region}"
-    when 'Mexico', 'Slovakia'
+    when 'MX', 'SK'
       "#{postal_code} #{city}, #{region}"
-    when 'Italy'
+    when 'IT'
       "#{postal_code} #{city} (#{region})"
-    when 'Belarus'
+    when 'BY'
       "#{postal_code} #{city}-(#{region})"
-    when 'USA', 'Canada', 'Australia', nil, ""
+    when 'US', 'CA', 'AU', nil, ""
       "#{city} #{region}  #{postal_code}"
-    when 'Israel', 'Denmark', 'Finland', 'France', 'Germany', 'Greece', 'Italy', 'Norway', 'Spain', 'Sweden', 'Turkey', 'Cyprus', 'Portugal', 'Macedonia', 'Bosnia and Herzegovina'
+    when 'IL', 'DK', 'FI', 'FR', 'DE', 'GR', 'IT', 'NO', 'ES', 'SE', 'TR', 'CY', 'PT', 'MK', 'BA'
       "#{postal_code} #{city}"
-    when 'Kuwait', 'Syria', 'Oman', 'Estonia','Luxembourg', 'Belgium', 'Iceland', 'Switzerland', 'Austria', 'Moldova', 'Montenegro', 'Serbia', 'Bulgaria', 'Georgia', 'Poland', 'Armenia', 'Croatia', 'Romania', 'Azerbaijan'
+    when 'KW', 'SY', 'OM', 'EE', 'LU', 'BE', 'IS', 'CH', 'AT', 'MD', 'ME', 'RS', 'BG', 'GE', 'PL', 'AM', 'HR', 'RO', 'AZ'
       "#{postal_code} #{city}"
-    when 'Netherlands'
+    when 'NL'
       "#{postal_code}  #{city}"
-    when 'Ireland'
+    when 'IE'
       "#{city}, #{region}"
-    when 'England', 'Scotland', 'Wales', 'United Kingdom', 'Russia', 'Russian Federation', 'Ukraine', 'Jordan', 'Lebanon','Iran, Islamic Republic of', 'Iran', 'Saudi Arabia', 'New Zealand'
+    when 'GB', 'RU', 'UA', 'JO', 'LB', 'IR', 'SA', 'NZ'
       "#{city}  #{postal_code}" # Locally these may be on separate lines. The USPS prefers the city line above the country line, though.
-    when 'Ecuador'
+    when 'EC'
       "#{postal_code} #{city}"
-    when 'Hong Kong', 'Syria', 'Iraq', 'Yemen', 'Qatar', 'Albania'
+    when 'HK', 'IQ', 'YE', 'QA', 'AL'
       "#{city}"
-    when 'United Arab Emirates'
+    when 'AE'
       "#{postal_code}\n#{city}"
-    when 'Japan'
+    when 'JP'
       "#{city}, #{region}\n#{postal_code}"
-    when 'Egypt', 'South Africa','Isle of Man', 'Kazakhstan', 'Hungary'
+    when 'EG', 'ZA', 'IM', 'KZ', 'HU'
       "#{city}\n#{postal_code}"
-    when 'Latvia'
+    when 'LV'
       "#{city}, LV-#{postal_code}"
-    when 'Lithuania'
+    when 'LT'
       "LT-#{postal_code} #{city}"
-    when 'Slovenia'
+    when 'SI'
       "SI-#{postal_code} #{city}"
-    when 'Czech Republic'
+    when 'CZ'
       "#{postal_code} #{region}\n#{city}"
     else
       if Kernel.const_defined?("Rails")
@@ -106,7 +128,8 @@ class Snail
     end
   end
   
+  # TODO after country name lookup deprecation, add localized country names to this
   def country_line
-    self.class.home_country.to_s.upcase == country.to_s.upcase ? nil : country.to_s.upcase
+    self.class.home_country == country ? nil : ::Snail::Iso3166::ALPHA2[country]
   end
 end
