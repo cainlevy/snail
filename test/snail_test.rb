@@ -73,7 +73,7 @@ class SnailTest < ActiveSupport::TestCase
 
   test "includes country name for international addresses" do
     s = Snail.new(@ca)
-    assert s.to_s.match(/Canada/i)
+    assert s.to_s.match(/Canada/i), s.to_s
   end
 
   test "output ok if country is nil" do
@@ -96,6 +96,11 @@ class SnailTest < ActiveSupport::TestCase
     assert_equal "SI", s.country
   end
 
+  test "store country from country alpha2 in alpha2" do
+    s = Snail.new(@ca.merge(:country => 'GB'))
+    assert_equal "GB", s.country
+  end
+
   test "store country from country alpha2 exception in alpha2" do
     s = Snail.new(@ca.merge(:country => 'UK'))
     assert_equal "GB", s.country
@@ -103,7 +108,7 @@ class SnailTest < ActiveSupport::TestCase
 
   test "country names are uppercased" do
     s = Snail.new(@ca)
-    assert s.to_s.match(/CANADA/)
+    assert s.to_s.match(/CANADA/), s.to_s
   end
 
   test "empty lines are removed" do

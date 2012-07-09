@@ -49,8 +49,8 @@ class Snail
   def self.lookup_country_iso(val)
     return nil if val.blank?
     val = val.upcase
-    if iso = ::Snail::Iso3166::ALPHA2[val]
-      iso
+    if ::Snail::Iso3166::ALPHA2[val]
+      val
     elsif iso = ::Snail::Iso3166::ALPHA2_EXCEPTIONS[val]
       iso
     elsif iso = ::Snail::Iso3166::ALPHA3_TO_ALPHA2[val]
