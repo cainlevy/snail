@@ -35,8 +35,13 @@ class SnailTest < ActiveSupport::TestCase
     assert_equal 'Somewheres', s.city
   end
 
+  test "aliases common street names" do
+    assert_equal Snail.new(:street_1 => "123 Foo St").line_1, Snail.new(:line_1 => "123 Foo St").line_1
+  end
+
   test "aliases common city synonyms" do
     assert_equal Snail.new(:town => "Somewheres").city, Snail.new(:city => "Somewheres").city
+    assert_equal Snail.new(:locality => "Somewheres").city, Snail.new(:city => "Somewheres").city
   end
 
   test "aliases common region synonyms" do

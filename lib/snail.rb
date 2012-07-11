@@ -28,7 +28,10 @@ class Snail
   {
     :full_name  => :name,
     :street     => :line_1,
+    :street_1   => :line_1,
+    :street_2   => :line_2,
     :town       => :city,
+    :locality   => :city,
     :state      => :region,
     :province   => :region,
     :zip        => :postal_code,
