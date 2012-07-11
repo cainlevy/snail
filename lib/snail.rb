@@ -14,6 +14,8 @@ class Snail
 
   # this will be raised whenever formatting or validation is run on an unsupported or unknown country
   class UnknownCountryError < ArgumentError; end
+  # this will be raised whenever initialization doesn't recognize a key
+  class UnknownAttribute < ArgumentError; end
 
   # My made-up standard fields.
   attr_accessor :name
