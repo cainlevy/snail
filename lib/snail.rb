@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 require 'snail/configurable'
 require 'snail/constants'
 require 'snail_helpers'
