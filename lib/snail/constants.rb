@@ -1,4 +1,4 @@
-# coding: utf-8
+# -*- encoding : utf-8 -*-
 
 class Snail
   # based on http://www.columbia.edu/kermit/postal.html#index, which is in turn based on
