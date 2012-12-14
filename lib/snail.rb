@@ -79,7 +79,7 @@ class Snail
   end
 
   def to_html
-    "<address>#{CGI.escapeHTML(to_s).gsub("\n", '<br />')}</address>".html_safe
+    CGI.escapeHTML(to_s).gsub("\n", '<br />').html_safe
   end
 
   # this method will get much larger. completeness is out of my scope at this time.
