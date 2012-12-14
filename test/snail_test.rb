@@ -138,7 +138,7 @@ class SnailTest < ActiveSupport::TestCase
   test "to_html" do
     s = Snail.new(@ca)
     s.name = 'John & Jane Doe'
-    assert_equal "<address>John &amp; Jane Doe<br />12345 5th St<br />Somewheres NY  12345<br />CANADA</address>", s.to_html
+    assert_equal "John &amp; Jane Doe<br />12345 5th St<br />Somewheres NY  12345<br />CANADA", s.to_html
     assert s.to_html.html_safe?
   end
 end
