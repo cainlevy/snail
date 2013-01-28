@@ -391,7 +391,7 @@ class Snail
       'CF' => ["CENTRAL AFRICAN REPUBLIC"],
       'CG' => ["CONGO", "REPUBLIC OF THE CONGO"],
       'CH' => ["SWITZERLAND"],
-      'CI' => ["COTE D'IVOIRE", "CôTE D'IVOIRE", "IVORY COAST", "REPUBLIC OF CôTE D'IVOIRE"],
+      'CI' => ["COTE D'IVOIRE", "CÔTE D'IVOIRE", "IVORY COAST", "REPUBLIC OF CÔTE D'IVOIRE"],
       'CK' => ["COOK ISLANDS"],
       'CL' => ["CHILE"],
       'CM' => ["CAMEROON"],
