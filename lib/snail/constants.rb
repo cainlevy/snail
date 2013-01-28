@@ -347,6 +347,7 @@ class Snail
     # as of January 28, 2013
     # pulled http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
     ALPHA2 = {
+      'AC' => ["ASCENSION", "ASCENSION ISLAND"],
       'AD' => ["ANDORRA"],
       'AE' => ["UNITED ARAB EMIRATES"],
       'AF' => ["AFGHANISTAN"],
@@ -553,7 +554,7 @@ class Snail
       'SH' => ["SAINT HELENA"],
       'SI' => ["SLOVENIA"],
       'SJ' => ["SVALBARD AND JAN MAYEN"],
-      'SK' => ["SLOVAKIA", "SLOVAK REPPUBLIC"],
+      'SK' => ["SLOVAKIA", "SLOVAK REPUBLIC"],
       'SL' => ["SIERRA LEONE"],
       'SM' => ["SAN MARINO"],
       'SN' => ["SENEGAL"],
