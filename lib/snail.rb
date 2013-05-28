@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-require 'snail/configurable'
+require 'snail/initializable'
 require 'snail/constants'
 require 'snail_helpers'
 
@@ -11,7 +11,7 @@ if defined? ActionView
 end
 
 class Snail
-  include Configurable
+  include Snail::Initializable
 
   # this will be raised whenever formatting or validation is run on an unsupported or unknown country
   class UnknownCountryError < ArgumentError; end

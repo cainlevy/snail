@@ -1,5 +1,5 @@
 class Snail
-  module Configurable
+  module Initializable
     def initialize(attrs = {}, &block)
       attrs.each do |k, v|
         m = "#{k}="
@@ -12,5 +12,4 @@ class Snail
       yield self if block_given?
     end
   end
-  include Configurable
 end
