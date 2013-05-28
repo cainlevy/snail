@@ -71,20 +71,17 @@ class SnailTest < ActiveSupport::TestCase
   end
 
   test "does not include country name for domestic addresses" do
-    s = Snail.new(@us)
+    s = Snail.new(@us.merge(:origin => 'US'))
     assert !s.to_s.match(/United States/i)
-  end
-
-  test "does not include country name for domestic addresses in canada" do
-    Snail.home_country = "CA"
-    s = Snail.new(@ca)
+    s = Snail.new(@ca.merge(:origin => 'CA'))
     assert !s.to_s.match(/Canada/i)
-    Snail.home_country = "US"
   end
 
   test "includes country name for international addresses" do
-    s = Snail.new(@ca)
-    assert s.to_s.match(/Canada\Z/i), s.to_s
+    s = Snail.new(@us.merge(:origin => 'CA'))
+    assert s.to_s.match(/United States/i)
+    s = Snail.new(@ca.merge(:origin => 'US'))
+    assert s.to_s.match(/Canada/i)
   end
 
   test "includes first country name for countries with many commonly used names" do

@@ -68,6 +68,16 @@ class Snail
     end
   end
 
+  # Where the mail is coming from.
+  def origin=(val)
+    @origin = Snail.lookup_country_iso(val)
+  end
+
+  # Where the mail is coming from. Defaults to the global `home_country`.
+  def origin
+    @origin ||= Snail.home_country
+  end
+
   # Store country as ISO-3166 Alpha 2
   def country=(val)
     @country = Snail.lookup_country_iso(val)
@@ -133,8 +143,8 @@ class Snail
     end
   end
 
-  # TODO localize to the origin country from ISO code
+  # TODO localize to the origin country
   def country_line
-    ::Snail::Iso3166::ALPHA2[country].first if country and self.class.home_country != country
+    ::Snail::Iso3166::ALPHA2[country].first if country and self.origin != country
   end
 end
