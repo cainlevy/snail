@@ -46,16 +46,6 @@ class SnailTest < ActiveSupport::TestCase
   ## Country Normalization
   ##
 
-  test "normalize country name to alpha2" do
-    s = Snail.new(@ca.merge(:country => 'Slovenia'))
-    assert_equal "SI", s.country
-  end
-
-  test "normalize uppercase country name to alpha2" do
-    s = Snail.new(@ca.merge(:country => 'JAPAN'))
-    assert_equal "JP", s.country
-  end
-
   test "normalize alpha3 to alpha2" do
     s = Snail.new(@ca.merge(:country => 'SVN'))
     assert_equal "SI", s.country
@@ -86,10 +76,10 @@ class SnailTest < ActiveSupport::TestCase
   end
 
   test "does not include country name for domestic addresses in canada" do
-    Snail.home_country = "Canada"
+    Snail.home_country = "CA"
     s = Snail.new(@ca)
     assert !s.to_s.match(/Canada/i)
-    Snail.home_country = "USA"
+    Snail.home_country = "US"
   end
 
   test "includes country name for international addresses" do
