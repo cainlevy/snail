@@ -6,19 +6,6 @@ class SnailTest < ActiveSupport::TestCase
     @ca = {:name => "John Doe", :line_1 => "12345 5th St", :city => "Somewheres", :state => "NY", :zip => "12345", :country => 'CAN'}
   end
 
-  test "provides USPS country names" do
-    assert Snail.const_defined?('USPS_COUNTRIES')
-  end
-
-  test "provides USA state names with abbreviations" do
-    assert Snail.const_defined?('USA_STATES')
-    assert_equal 'MN', Snail::USA_STATES['Minnesota']
-  end
-
-  test "USA states include territories and islands" do
-    assert Snail::USA_STATES['Guam']
-  end
-
   test "provides region codes via 2-digit iso country code" do
     assert_equal "WA", Snail::REGIONS[:us]["Washington"]
     assert_equal "WA", Snail::REGIONS[:au]["Western Australia"]
