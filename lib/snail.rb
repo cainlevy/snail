@@ -1,14 +1,10 @@
 # -*- encoding : utf-8 -*-
 require 'snail/initializable'
 require 'snail/constants'
-require 'snail_helpers'
+require 'snail/helpers'
 
 require 'cgi'
 require 'active_support/core_ext/string/output_safety'
-
-if defined?(ActionView) && !defined?(Carmen::Rails)
-  ActionView::Base.class_eval { include SnailHelpers }
-end
 
 class Snail
   include Snail::Initializable
@@ -44,6 +40,16 @@ class Snail
     :postcode   => :postal_code
   }.each do |new, existing|
     alias_method "#{new}=", "#{existing}="
+  end
+
+  # Load the SnailHelpers module into ActionView::Base.  Previously this was done
+  # automatically, but going forward it must be included explicitly by calling
+  # Snail.load_helpers.
+  def self.load_helpers
+    if defined? ActionView
+      warn '[DEPRECATION] Snail::Helpers will be removed in a future release.'
+      ActionView::Base.class_eval { include Snail::Helpers }
+    end
   end
 
   def self.home_country
