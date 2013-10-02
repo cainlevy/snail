@@ -42,7 +42,7 @@ Taking regular data and formatting it into an internationally mailable address:
     :city => "Bentley",
     :region => "WA",
     :postal_code => "6102",
-    :country => "Australia"
+    :country => "AU"
   ).to_s
   
   => "Jon Doe\n12345 Somewhere Ln\nBENTLEY WA  6102\nAUSTRALIA"
@@ -58,7 +58,7 @@ be left off any output. To change the home country:
     :city => "Bentley",
     :region => "WA",
     :postal_code => "6102",
-    :country => "Australia"
+    :country => "AU"
   ).to_s
 
   => "Jon Doe\n12345 Somewhere Ln\nBENTLEY WA  6102"
