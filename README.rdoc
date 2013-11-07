@@ -24,12 +24,12 @@ And then there's Great Britain, which Frank's Compulsive Guide describes as "whe
 
 I hope to tackle this plugin in stages, with help from the open source community:
 
-# provide standardized USPS country names
-# provide basic formatting rules for the city line in major countries
-# provide basic country-specific validation logic
-# build a best-practice form field generator to collect appropriate address information
-# expand to other originating countries
-# continue fleshing out the formatting and validation
+1. Provide standardized USPS country names
+2. Provide basic formatting rules for the city line in major countries
+3. Provide basic country-specific validation logic
+4. Build a best-practice form field generator to collect appropriate address information
+5. Expand to other originating countries
+6. Continue fleshing out the formatting and validation
 
 == Example
 
