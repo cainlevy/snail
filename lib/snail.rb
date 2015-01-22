@@ -61,7 +61,7 @@ class Snail
   end
 
   def self.lookup_country_iso(val)
-    return nil if val.blank?
+    return nil if val.nil? || val.empty?
     val = val.upcase
     if ::Snail::Iso3166::ALPHA2[val]
       val
