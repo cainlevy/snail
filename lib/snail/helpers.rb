@@ -98,6 +98,35 @@ class Snail
           'Armed Forces Europe' => 'AE',
           'Armed Forces Middle East' => 'AE',
           'Armed Forces Pacific' => 'AP',
+      },
+      # http://en.wikipedia.org/wiki/Counties_of_Ireland
+      # NB: only includes Replublic of Ireland, also no abbreviations
+      :ie => {
+          'Carlows' => 'Carlows',
+          "Cavan" => 'Cavan',
+          'Clare' => 'Clare',
+          'Cork' => 'Cork',
+          'Donegal' => 'Donegal',
+          'Galway' => 'Galway',
+          'Kerry' => 'Kerry',
+          'Kildare' => 'Kildare',
+          'Kilkenny' => 'Kilkenny',
+          'Laois' => 'Laois',
+          'Leitrim' => 'Leitrim',
+          'Limerick' => 'Limerick',
+          'Longford' => 'Longford',
+          'Louth' => 'Louth',
+          'Mayo' => 'Mayo',
+          'Meath' => 'Meath',
+          'Monaghan' => 'Monaghan',
+          'Offaly' => 'Offaly',
+          'Roscommon' => 'Roscommon',
+          'Sligo' => 'Sligo',
+          'Tipperary' => 'Tipperary',
+          'Waterford' => 'Waterford',
+          'Westmeath' => 'Westmeath',
+          'Wexford' => 'Wexford',
+          'Wicklow' => 'Wicklow',
       }
   }
 
