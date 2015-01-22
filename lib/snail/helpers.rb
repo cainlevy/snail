@@ -102,11 +102,12 @@ class Snail
       # http://en.wikipedia.org/wiki/Counties_of_Ireland
       # NB: only includes Replublic of Ireland, also no abbreviations
       :ie => {
-          'Carlows' => 'Carlows',
+          'Carlow' => 'Carlow',
           "Cavan" => 'Cavan',
           'Clare' => 'Clare',
           'Cork' => 'Cork',
           'Donegal' => 'Donegal',
+          'Dublin' => 'Dublin',
           'Dún Laoghaire–Rathdown' => 'Dún Laoghaire–Rathdown',
           'Fingal' => 'Fingal',
           'Galway' => 'Galway',
