@@ -4,12 +4,14 @@ class SnailTest < ActiveSupport::TestCase
   def setup
     @us = {:name => "John Doe", :line_1 => "12345 5th St", :city => "Somewheres", :state => "NY", :zip => "12345", :country => 'USA'}
     @ca = {:name => "John Doe", :line_1 => "12345 5th St", :city => "Somewheres", :state => "NY", :zip => "12345", :country => 'CAN'}
+    @ie = {:name => "John Doe", :line_1 => "12345 5th St", :city => "Somewheres", :region => "Dublin", :zip => "12345", :country => 'IE'}
   end
 
   test "provides region codes via 2-digit iso country code" do
     assert_equal "WA", Snail::REGIONS[:us]["Washington"]
     assert_equal "WA", Snail::REGIONS[:au]["Western Australia"]
     assert_equal "BC", Snail::REGIONS[:ca]["British Columbia"]
+    assert_equal "Cork", Snail::REGIONS[:ie]["Cork"]
   end
 
   ##
