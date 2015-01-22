@@ -36,7 +36,6 @@ class SnailTest < ActiveSupport::TestCase
   test "aliases common region synonyms" do
     assert_equal Snail.new(:state => "Somewheres").region, Snail.new(:region => "Somewheres").region
     assert_equal Snail.new(:province => "Somewheres").region, Snail.new(:region => "Somewheres").region
-    assert_equal Snail.new(:county => "Somewheres").region, Snail.new(:region => "Somewheres").region
   end
 
   test "aliases common postal code synonyms" do

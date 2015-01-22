@@ -35,7 +35,6 @@ class Snail
     :locality   => :city,
     :state      => :region,
     :province   => :region,
-    :county     => :region,
     :zip        => :postal_code,
     :zip_code   => :postal_code,
     :postcode   => :postal_code
