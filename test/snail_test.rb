@@ -86,6 +86,13 @@ class SnailTest < Snail::TestCase
     assert s.to_s.match(/Canada/i)
   end
 
+  test "includes translated country name for international addresses" do
+    s = Snail.new(@us.merge(:origin => 'FR'))
+    assert s.to_s.match(/ÉTATS-UNIS/i)
+    s = Snail.new(@ca.merge(:origin => 'EC'))
+    assert s.to_s.match(/CANADÁ/i)
+  end
+
   test "includes first country name for countries with many commonly used names" do
     s = Snail.new(@ca.merge(:country => 'UK'))
     assert s.to_s.match(/United Kingdom\Z/i), s.to_s
