@@ -157,6 +157,7 @@ class Snail
   end
 
   def translated_country(origin, country)
-    i18n = YAML.load_file(File.join(File.dirname(File.expand_path(__FILE__)), "../assets/#{origin}.yml"))[country]
+    path = File.join(File.dirname(File.expand_path(__FILE__)), "../assets/#{origin}.yml")
+    File.read(path).match(/^#{country}: (.*)$/)[1]
   end
 end
