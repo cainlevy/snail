@@ -5,6 +5,7 @@ require 'snail/helpers'
 
 require 'cgi'
 require 'active_support/core_ext/string/output_safety'
+require 'yaml'
 
 class Snail
   include Snail::Initializable
@@ -149,8 +150,13 @@ class Snail
     end
   end
 
-  # TODO localize to the origin country
   def country_line
-    ::Snail::Iso3166::ALPHA2[country].first if country and self.origin != country
+    if country and self.origin != country 
+      (translated_country(self.origin, country) || translated_country("US", country))
+    end
+  end
+
+  def translated_country(origin, country)
+    i18n = YAML.load_file(File.join(File.dirname(File.expand_path(__FILE__)), "../assets/#{origin}.yml"))[country]
   end
 end
