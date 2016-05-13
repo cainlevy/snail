@@ -22,7 +22,12 @@ class Snail
   attr_accessor :city
   attr_accessor :region
   attr_accessor :postal_code
-  attr_accessor :country
+  attr_reader   :country
+
+  # Store country as ISO-3166 Alpha 2
+  def country=(val)
+    @country = Snail.lookup_country_iso(val)
+  end
 
   # Aliases for easier assignment compatibility
   {
@@ -85,11 +90,6 @@ class Snail
     @origin ||= Snail.home_country
   end
 
-  # Store country as ISO-3166 Alpha 2
-  def country=(val)
-    @country = Snail.lookup_country_iso(val)
-  end
-
   def to_s
     [name, line_1, line_2, city_line, country_line].select{|line| !(line.nil? or line.empty?)}.join("\n")
   end
@@ -114,7 +114,7 @@ class Snail
       "#{postal_code} #{city}-(#{region})"
     when 'US', 'CA', 'AU', nil, ""
       "#{city} #{region}  #{postal_code}"
-    when 'IL', 'DK', 'FI', 'FR', 'DE', 'GR', 'IT', 'NO', 'ES', 'SE', 'TR', 'CY', 'PT', 'MK', 'BA'
+    when 'IL', 'DK', 'FI', 'FR', 'DE', 'GR', 'NO', 'ES', 'SE', 'TR', 'CY', 'PT', 'MK', 'BA'
       "#{postal_code} #{city}"
     when 'KW', 'SY', 'OM', 'EE', 'LU', 'BE', 'IS', 'CH', 'AT', 'MD', 'ME', 'RS', 'BG', 'GE', 'PL', 'AM', 'HR', 'RO', 'AZ'
       "#{postal_code} #{city}"
@@ -151,7 +151,7 @@ class Snail
   end
 
   def country_line
-    if country and self.origin != country 
+    if country and self.origin != country
       (translated_country(self.origin, country) || translated_country("US", country))
     end
   end

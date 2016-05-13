@@ -69,7 +69,7 @@ class SnailTest < Snail::TestCase
 
   test "includes two spaces between region and zip for domestic mail" do
     s = Snail.new(@us)
-    assert /NY  12345/, s.city_line
+    assert s.city_line.match(/NY  12345/)
   end
 
   test "does not include country name for domestic addresses" do
