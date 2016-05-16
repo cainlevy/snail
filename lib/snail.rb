@@ -5,7 +5,6 @@ require 'snail/helpers'
 
 require 'cgi'
 require 'active_support/core_ext/string/output_safety'
-require 'yaml'
 
 class Snail
   include Snail::Initializable
