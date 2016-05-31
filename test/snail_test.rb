@@ -79,11 +79,25 @@ class SnailTest < Snail::TestCase
     assert !s.to_s.match(/Canada/i)
   end
 
+  test "includes country name for domestic addresses if the country parameter is present" do
+    s = Snail.new(@us.merge(:origin => 'US'))
+    assert s.to_s(country: true).match(/United States/i)
+    s = Snail.new(@ca.merge(:origin => 'CA'))
+    assert s.to_s(country: true).match(/Canada/i)
+  end
+
   test "includes country name for international addresses" do
     s = Snail.new(@us.merge(:origin => 'CA'))
     assert s.to_s.match(/United States/i)
     s = Snail.new(@ca.merge(:origin => 'US'))
     assert s.to_s.match(/Canada/i)
+  end
+
+  test "includes country name for international addresses if the country parameter is present" do
+    s = Snail.new(@us.merge(:origin => 'CA'))
+    assert s.to_s(country: true).match(/United States/i)
+    s = Snail.new(@ca.merge(:origin => 'US'))
+    assert s.to_s(country: true).match(/Canada/i)
   end
 
   test "includes translated country name for international addresses" do
