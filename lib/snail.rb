@@ -89,16 +89,16 @@ class Snail
     @origin ||= Snail.home_country
   end
 
-  def to_s(country: false)
+  def to_s(with_country: false)
     address_lines = [name, line_1, line_2, city_line]
-    if country || (@country && self.origin != @country)
+    if with_country || (country && self.origin != country)
       address_lines.push(country_line)
     end
     address_lines.select{|line| !(line.nil? or line.empty?)}.join("\n")
   end
 
-  def to_html(country: false)
-    CGI.escapeHTML(to_s(country: country)).gsub("\n", '<br />').html_safe
+  def to_html(with_country: false)
+    CGI.escapeHTML(to_s(with_country: with_country)).gsub("\n", '<br />').html_safe
   end
 
   # this method will get much larger. completeness is out of my scope at this time.
