@@ -89,12 +89,16 @@ class Snail
     @origin ||= Snail.home_country
   end
 
-  def to_s
-    [name, line_1, line_2, city_line, country_line].select{|line| !(line.nil? or line.empty?)}.join("\n")
+  def to_s(with_country: nil)
+    address_lines = [name, line_1, line_2, city_line]
+    if with_country || (with_country.nil? && country && self.origin != country)
+      address_lines.push(country_line)
+    end
+    address_lines.select{|line| !(line.nil? or line.empty?)}.join("\n")
   end
 
-  def to_html
-    CGI.escapeHTML(to_s).gsub("\n", '<br />').html_safe
+  def to_html(with_country: nil)
+    CGI.escapeHTML(to_s(with_country: with_country)).gsub("\n", '<br />').html_safe
   end
 
   # this method will get much larger. completeness is out of my scope at this time.
@@ -150,9 +154,7 @@ class Snail
   end
 
   def country_line
-    if country and self.origin != country
-      (translated_country(self.origin, country) || translated_country("US", country))
-    end
+    (translated_country(self.origin, @country) || translated_country("US", @country))
   end
 
   def translated_country(origin, country)

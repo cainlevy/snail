@@ -72,18 +72,46 @@ class SnailTest < Snail::TestCase
     assert s.city_line.match(/NY  12345/)
   end
 
-  test "does not include country name for domestic addresses" do
+  test "does not include country name for domestic addresses by default" do
     s = Snail.new(@us.merge(:origin => 'US'))
     assert !s.to_s.match(/United States/i)
     s = Snail.new(@ca.merge(:origin => 'CA'))
     assert !s.to_s.match(/Canada/i)
   end
 
-  test "includes country name for international addresses" do
+  test "includes country name for domestic addresses if with_country parameter is true" do
+    s = Snail.new(@us.merge(:origin => 'US'))
+    assert s.to_s(with_country: true).match(/United States/i)
+    s = Snail.new(@ca.merge(:origin => 'CA'))
+    assert s.to_s(with_country: true).match(/Canada/i)
+  end
+
+  test "does not include country name for domestic addresses if with_country parameter is false" do
+    s = Snail.new(@us.merge(:origin => 'US'))
+    assert !s.to_s(with_country: false).match(/United States/i)
+    s = Snail.new(@ca.merge(:origin => 'CA'))
+    assert !s.to_s(with_country: false).match(/Canada/i)
+  end
+
+  test "includes country name for international addresses by default" do
     s = Snail.new(@us.merge(:origin => 'CA'))
     assert s.to_s.match(/United States/i)
     s = Snail.new(@ca.merge(:origin => 'US'))
     assert s.to_s.match(/Canada/i)
+  end
+
+  test "includes country name for international addresses if with_country parameter is true" do
+    s = Snail.new(@us.merge(:origin => 'CA'))
+    assert s.to_s(with_country: true).match(/United States/i)
+    s = Snail.new(@ca.merge(:origin => 'US'))
+    assert s.to_s(with_country: true).match(/Canada/i)
+  end
+
+  test "does not include country name for international addresses if with_country parameter is false" do
+    s = Snail.new(@us.merge(:origin => 'CA'))
+    assert !s.to_s(with_country: false).match(/United States/i)
+    s = Snail.new(@ca.merge(:origin => 'US'))
+    assert !s.to_s(with_country: false).match(/Canada/i)
   end
 
   test "includes translated country name for international addresses" do
