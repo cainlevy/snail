@@ -48,6 +48,23 @@ Snail.new(
 => "Jon Doe\n12345 Somewhere Ln\nBENTLEY WA  6102"
 ```
 
+You can override this default behavior by specifying `with_country` as `true` or `false`:
+
+```ruby
+Snail.home_country = "Australia"
+Snail.new(
+  :name => "Jon Doe",
+  :line_1 => "12345 Somewhere Ln",
+  :line_2 => nil,
+  :city => "Bentley",
+  :region => "WA",
+  :postal_code => "6102",
+  :country => "AU"
+).to_s(with_country: true)
+
+=> "Jon Doe\n12345 Somewhere Ln\nBentley WA  6102\nAUSTRALIA"
+```
+
 See the test cases for more.
 
 ## Fun Times
