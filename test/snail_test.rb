@@ -146,11 +146,23 @@ class SnailTest < Snail::TestCase
     assert_equal "John Doe\n12345 5th St\nSomewheres NY  12345\nCANADA", s.to_s
   end
 
+  test "to_s ireland doesn't show a linebreak if zip is empty" do
+    s = Snail.new(@ie.merge(:zip => ""))
+    puts s.to_s
+    assert_equal "John Doe\n12345 5th St\nSomewheres, Dublin\nIRELAND", s.to_s
+  end
+
   test "to_html" do
     s = Snail.new(@ca)
     s.name = 'John & Jane Doe'
     assert_equal "John &amp; Jane Doe<br />12345 5th St<br />Somewheres NY  12345<br />CANADA", s.to_html
     assert s.to_html.html_safe?
+  end
+
+  test "to_html ireland doesn't show a linebreak if zip is empty" do
+    s = Snail.new(@ie.merge(:zip => ""))
+    s.name = 'John & Jane Doe'
+    assert_equal "John &amp; Jane Doe<br />12345 5th St<br />Somewheres, Dublin<br />IRELAND", s.to_html
   end
 end
 

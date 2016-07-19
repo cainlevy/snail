@@ -132,7 +132,7 @@ class Snail
     when 'NL'
       "#{postal_code}  #{city}"
     when 'IE'
-      "#{city}, #{region}"
+      "#{city}, #{region}#{"\n" unless postal_code.nil? || postal_code.empty?}#{postal_code}"
     when 'GB', 'RU', 'UA', 'JO', 'LB', 'IR', 'SA', 'NZ'
       "#{city}  #{postal_code}" # Locally these may be on separate lines. The USPS prefers the city line above the country line, though.
     when 'EC'
