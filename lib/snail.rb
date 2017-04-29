@@ -120,9 +120,9 @@ class Snail
     when 'MX', 'SK'
       "#{postal_code} #{city}, #{region}"
     when 'IT'
-      "#{postal_code} #{city} (#{region})"
+      "#{postal_code} #{city} #{region}"
     when 'BY'
-      "#{postal_code} #{city}-(#{region})"
+      "#{postal_code} #{city}-#{region}"
     when 'US', 'CA', 'AU', nil, ""
       "#{city} #{region}  #{postal_code}"
     when 'IL', 'DK', 'FI', 'FR', 'DE', 'GR', 'NO', 'ES', 'SE', 'TR', 'CY', 'PT', 'MK', 'BA'
