@@ -50,17 +50,17 @@ class SnailTest < Snail::TestCase
 
   test "normalize alpha3 to alpha2" do
     s = Snail.new(@ca.merge(:country => 'SVN'))
-    assert_equal "SI", s.country
+    assert_equal "SI", s.country_iso
   end
 
   test "normalize alpha2 exceptions to alpha2" do
     s = Snail.new(@ca.merge(:country => 'UK'))
-    assert_equal "GB", s.country
+    assert_equal "GB", s.country_iso
   end
 
   test "leave alpha2 as alpha2" do
     s = Snail.new(@ca.merge(:country => 'GB'))
-    assert_equal "GB", s.country
+    assert_equal "GB", s.country_iso
   end
 
   ##
@@ -119,6 +119,16 @@ class SnailTest < Snail::TestCase
     assert s.to_s.match(/ÉTATS-UNIS/i)
     s = Snail.new(@ca.merge(:origin => 'EC'))
     assert s.to_s.match(/CANADÁ/i)
+  end
+
+  test "falls back to english if the country name is not translated in the origin country langage" do
+    s = Snail.new({:name => "John Doe", :line_1 => "12345 5th St", :city => "Somewheres", :state => "NY", :zip => "12345", :country => 'IE', :origin => 'AF'})
+    assert s.to_s(with_country: true).match(/IRELAND/i)
+  end
+
+  test "includes the raw country if it is not a valid iso code" do
+    s = Snail.new({:name => "John Doe", :line_1 => "12345 5th St", :city => "Somewheres", :state => "NY", :zip => "12345", :country => 'United States'})
+    assert s.to_s(with_country: true).match(/United States/)
   end
 
   test "includes first country name for countries with many commonly used names" do
