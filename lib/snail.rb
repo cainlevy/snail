@@ -16,35 +16,33 @@ class Snail
 
   # Snail's canonical fields
   attr_accessor :name
-  attr_accessor :line_1
-  attr_accessor :line_2
-  attr_accessor :city
-  attr_accessor :region
-  attr_accessor :postal_code
-  attr_reader   :country
+  alias full_name= name=
 
-  # Store country as ISO-3166 Alpha 2
+  attr_accessor :line_1
+  alias street=   line_1=
+  alias street_1= line_1=
+  alias street1=  line_1=
+
+  attr_accessor :line_2
+  alias street_2= line_2=
+  alias street2=  line_2=
+
+  attr_accessor :city
+  alias town=     city=
+  alias locality= city=
+
+  attr_accessor :region
+  alias state=    region=
+  alias province= region=
+
+  attr_accessor :postal_code
+  alias zip=      postal_code=
+  alias zip_code= postal_code=
+  alias postcode= postal_code=
+
+  attr_reader   :country
   def country=(val)
     @country = Snail.lookup_country_iso(val)
-  end
-
-  # Aliases for easier assignment compatibility
-  {
-    full_name: :name,
-    street:    :line_1,
-    street_1:  :line_1,
-    street1:   :line_1,
-    street_2:  :line_2,
-    street2:   :line_2,
-    town:      :city,
-    locality:  :city,
-    state:     :region,
-    province:  :region,
-    zip:       :postal_code,
-    zip_code:  :postal_code,
-    postcode:  :postal_code
-  }.each do |new, existing|
-    alias_method "#{new}=", "#{existing}="
   end
 
   # Load the SnailHelpers module into ActionView::Base.  Previously this was done
