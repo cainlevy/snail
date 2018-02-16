@@ -14,7 +14,7 @@ class Snail
   # this will be raised whenever initialization doesn't recognize a key
   class UnknownAttribute < ArgumentError; end
 
-  # My made-up standard fields.
+  # Snail's canonical fields
   attr_accessor :name
   attr_accessor :line_1
   attr_accessor :line_2
@@ -30,19 +30,19 @@ class Snail
 
   # Aliases for easier assignment compatibility
   {
-    :full_name  => :name,
-    :street     => :line_1,
-    :street_1   => :line_1,
-    :street1    => :line_1,
-    :street_2   => :line_2,
-    :street2    => :line_2,
-    :town       => :city,
-    :locality   => :city,
-    :state      => :region,
-    :province   => :region,
-    :zip        => :postal_code,
-    :zip_code   => :postal_code,
-    :postcode   => :postal_code
+    full_name: :name,
+    street:    :line_1,
+    street_1:  :line_1,
+    street1:   :line_1,
+    street_2:  :line_2,
+    street2:   :line_2,
+    town:      :city,
+    locality:  :city,
+    state:     :region,
+    province:  :region,
+    zip:       :postal_code,
+    zip_code:  :postal_code,
+    postcode:  :postal_code
   }.each do |new, existing|
     alias_method "#{new}=", "#{existing}="
   end
@@ -51,14 +51,13 @@ class Snail
   # automatically, but going forward it must be included explicitly by calling
   # Snail.load_helpers.
   def self.load_helpers
-    if defined? ActionView
-      warn '[DEPRECATION] Snail::Helpers will be removed in a future release.'
-      ActionView::Base.class_eval { include Snail::Helpers }
-    end
+    return unless defined? ActionView
+    warn '[DEPRECATION] Snail::Helpers will be removed in a future release.'
+    ActionView::Base.class_eval { include Snail::Helpers }
   end
 
   def self.home_country
-    @home_country ||= "US"
+    @home_country ||= 'US'
   end
 
   def self.home_country=(val)
@@ -66,16 +65,12 @@ class Snail
   end
 
   def self.lookup_country_iso(val)
-    return nil if val.nil? || val.empty?
+    return if val.nil? || val.empty?
     val = val.upcase
     if ::Snail::Iso3166::ALPHA2[val]
       val
-    elsif iso = ::Snail::Iso3166::ALPHA2_EXCEPTIONS[val]
-      iso
-    elsif iso = ::Snail::Iso3166::ALPHA3_TO_ALPHA2[val]
-      iso
     else
-      nil
+      ::Snail::Iso3166::ALPHA2_EXCEPTIONS[val] || ::Snail::Iso3166::ALPHA3_TO_ALPHA2[val]
     end
   end
 
@@ -90,7 +85,7 @@ class Snail
   end
 
   def international?
-    country && self.origin != country
+    country && origin != country
   end
 
   def to_s(with_country: nil)
@@ -102,7 +97,9 @@ class Snail
       line_2,
       city_line,
       (country_line if with_country)
-    ].select{|line| !(line.nil? or line.empty?)}.join("\n")
+    ]
+      .reject { |line| line.nil? || line.empty? }
+      .join("\n")
   end
 
   def to_html(with_country: nil)
@@ -123,7 +120,7 @@ class Snail
       "#{postal_code} #{city} #{region}"
     when 'BY'
       "#{postal_code} #{city}-#{region}"
-    when 'US', 'CA', 'AU', nil, ""
+    when 'US', 'CA', 'AU', nil, ''
       "#{city} #{region}  #{postal_code}"
     when 'IL', 'DK', 'FI', 'FR', 'DE', 'GR', 'NO', 'ES', 'SE', 'TR', 'CY', 'PT', 'MK', 'BA'
       "#{postal_code} #{city}"
@@ -154,7 +151,7 @@ class Snail
     when 'CZ'
       "#{postal_code} #{region}\n#{city}"
     else
-      if Kernel.const_defined?("Rails")
+      if Kernel.const_defined?('Rails')
         Rails.logger.error "[Snail] Unknown Country: #{country}"
       end
       "#{city} #{region}  #{postal_code}"
@@ -162,7 +159,7 @@ class Snail
   end
 
   def country_line
-    (translated_country(self.origin, @country) || translated_country("US", @country))
+    (translated_country(origin, @country) || translated_country('US', @country))
   end
 
   def translated_country(origin, country)
