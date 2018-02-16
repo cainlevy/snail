@@ -164,6 +164,16 @@ class SnailTest < Snail::TestCase
     s.name = 'John & Jane Doe'
     assert_equal "John &amp; Jane Doe<br />12345 5th St<br />Somewheres, Dublin<br />IRELAND", s.to_html
   end
+
+  test 'name and organization in united states' do
+    s = Snail.new(country: 'US', name: 'NAME', organization: 'ORGANIZATION', city: 'CITY', region: 'STATE', postal_code: 'CODE')
+    assert_equal "NAME\nORGANIZATION\nCITY STATE  CODE", s.to_s
+  end
+
+  test 'name and organization in netherlands' do
+    s = Snail.new(country: 'NL', name: 'NAME', organization: 'ORGANIZATION', city: 'CITY', postal_code: 'CODE')
+    assert_equal "ORGANIZATION\nNAME\nCODE  CITY\nNETHERLANDS", s.to_s
+  end
 end
 
 

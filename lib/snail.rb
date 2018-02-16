@@ -45,6 +45,9 @@ class Snail
   attr_accessor :name
   alias full_name= name=
 
+  attr_accessor :organization
+  alias company= organization=
+
   attr_accessor :line_1
   alias street=   line_1=
   alias street_1= line_1=
@@ -89,13 +92,14 @@ class Snail
   def to_s(with_country: nil)
     with_country = true if with_country.nil? && international?
 
-    [
-      name,
-      line_1,
-      line_2,
-      city_line,
-      (country_line if with_country)
-    ]
+    (
+      recipient + [
+        line_1,
+        line_2,
+        city_line,
+        (country_line if with_country)
+      ]
+    )
       .reject { |line| line.nil? || line.empty? }
       .join("\n")
   end
@@ -163,5 +167,15 @@ class Snail
   def translated_country(origin, country)
     path = File.join(File.dirname(File.expand_path(__FILE__)), "../assets/#{origin}.yml")
     File.read(path).match(/^#{country}: (.*)$/)[1]
+  end
+
+  # NOTE: this is likely an incomplete list. please contribute!
+  private def recipient
+    case country
+    when 'NL'
+      [organization, name]
+    else
+      [name, organization]
+    end
   end
 end
