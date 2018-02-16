@@ -14,6 +14,33 @@ class Snail
   # this will be raised whenever initialization doesn't recognize a key
   class UnknownAttribute < ArgumentError; end
 
+  # Load the SnailHelpers module into ActionView::Base.  Previously this was done
+  # automatically, but going forward it must be included explicitly by calling
+  # Snail.load_helpers.
+  def self.load_helpers
+    return unless defined? ActionView
+    warn '[DEPRECATION] Snail::Helpers will be removed in a future release.'
+    ActionView::Base.class_eval { include Snail::Helpers }
+  end
+
+  def self.home_country
+    @home_country ||= 'US'
+  end
+
+  def self.home_country=(val)
+    @home_country = lookup_country_iso(val)
+  end
+
+  def self.lookup_country_iso(val)
+    return if val.nil? || val.empty?
+    val = val.upcase
+    if ::Snail::Iso3166::ALPHA2[val]
+      val
+    else
+      ::Snail::Iso3166::ALPHA2_EXCEPTIONS[val] || ::Snail::Iso3166::ALPHA3_TO_ALPHA2[val]
+    end
+  end
+
   # Snail's canonical fields
   attr_accessor :name
   alias full_name= name=
@@ -43,33 +70,6 @@ class Snail
   attr_reader   :country
   def country=(val)
     @country = Snail.lookup_country_iso(val)
-  end
-
-  # Load the SnailHelpers module into ActionView::Base.  Previously this was done
-  # automatically, but going forward it must be included explicitly by calling
-  # Snail.load_helpers.
-  def self.load_helpers
-    return unless defined? ActionView
-    warn '[DEPRECATION] Snail::Helpers will be removed in a future release.'
-    ActionView::Base.class_eval { include Snail::Helpers }
-  end
-
-  def self.home_country
-    @home_country ||= 'US'
-  end
-
-  def self.home_country=(val)
-    @home_country = lookup_country_iso(val)
-  end
-
-  def self.lookup_country_iso(val)
-    return if val.nil? || val.empty?
-    val = val.upcase
-    if ::Snail::Iso3166::ALPHA2[val]
-      val
-    else
-      ::Snail::Iso3166::ALPHA2_EXCEPTIONS[val] || ::Snail::Iso3166::ALPHA3_TO_ALPHA2[val]
-    end
   end
 
   # Where the mail is coming from.
