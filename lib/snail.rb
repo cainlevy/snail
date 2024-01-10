@@ -132,7 +132,7 @@ class Snail
       "#{city}  #{postal_code}" # Locally these may be on separate lines. The USPS prefers the city line above the country line, though.
     when 'EC'
       "#{postal_code} #{city}"
-    when 'HK', 'IQ', 'YE', 'QA', 'AL'
+    when 'HK', 'IQ', 'YE', 'QA', 'AL', 'BS'
       "#{city}"
     when 'AE'
       "#{postal_code}\n#{city}"
@@ -148,6 +148,8 @@ class Snail
       "SI-#{postal_code} #{city}"
     when 'CZ'
       "#{postal_code} #{region}\n#{city}"
+    when 'SG'
+      "#{country_line.titleize} #{postal_code}"
     else
       if Kernel.const_defined?('Rails')
         Rails.logger.error "[Snail] Unknown Country: #{country}"
