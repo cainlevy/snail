@@ -220,6 +220,7 @@ class Snail
       'SS' => ['SOUTH SUDAN'],
       'ST' => ['SAO TOME AND PRINCIPE'],
       'SV' => ['EL SALVADOR'],
+      'SX' => ['SINT MAARTEN'],
       'SY' => ['SYRIAN ARAB REPUBLIC', 'SYRIA'],
       'SZ' => ['SWAZILAND'],
       'TA' => ['TRISTAN DA CUNHA'],
